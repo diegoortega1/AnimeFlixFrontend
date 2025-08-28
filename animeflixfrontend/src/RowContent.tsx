@@ -1,8 +1,9 @@
 import { CardModal } from "./CardModal";
+import type { Anime } from "./core/Anime";
 
 interface Props {
   title: string;
-  animes: any[];
+  animes: Anime[];
 }
 
 export function RowContent({ title, animes }: Props) {
@@ -20,10 +21,7 @@ export function RowContent({ title, animes }: Props) {
         }}
       >
         {animes.map((anime) => (
-          <CardModal
-            key={anime.mal_id}
-            animeURL={anime.images.jpg.large_image_url}
-          ></CardModal>
+          <CardModal key={anime.id} anime={anime} />
         ))}
       </div>
     </div>

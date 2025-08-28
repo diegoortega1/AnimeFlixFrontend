@@ -16,13 +16,13 @@ function App() {
     <div>
       <Header />
       <div className="flex flex-col p-4 ">
-        <RowContent title="Los mas vistos" animes={animes.top.data} />
-        <RowContent title="Mejor valorados" animes={animes.favorite.data} />
+        <RowContent title="Los mas vistos" animes={animes.top} />
+        <RowContent title="Mejor valorados" animes={animes.favorite} />
         <RowContent
           title="Se estrenan proximamente Animeflix"
-          animes={animes.upcoming.data}
+          animes={animes.upcoming}
         />
-        <RowContent title="En emisión" animes={animes.airing.data} />
+        <RowContent title="En emisión" animes={animes.airing} />
       </div>
     </div>
   );

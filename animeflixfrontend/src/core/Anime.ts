@@ -7,13 +7,13 @@ export interface Anime {
   status: string;
   duration: string;
   score: number;
-  scored_by: number;
+  scoredBy: number;
   rank: number;
   synopsis: string;
   season: string;
   year: number;
   genres: Genre;
-  trailer: Trailer;
+  trailer: string;
   image: string;
 }
 
@@ -22,10 +22,4 @@ interface Genre {
   name: string;
   type: string;
   url: string;
-}
-
-interface Trailer {
-  image: string;
-  url: string;
-  youtube_id: string;
 }
