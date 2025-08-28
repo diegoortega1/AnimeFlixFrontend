@@ -11,13 +11,19 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Card } from "./Card";
 
-export function CardModal() {
+interface Props {
+  animeURL: string;
+}
+export function CardModal({ animeURL }: Props) {
   return (
     <Dialog>
-      <form>
+      <form className="flex items-center">
         <DialogTrigger asChild>
-          <Button variant="outline">Open Dialog</Button>
+          <Button variant="ghost" className="p-0 overflow-visible ">
+            <Card animeURL={animeURL} />
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
