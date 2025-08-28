@@ -13,7 +13,7 @@ export function RowContent({ title, animes }: Props) {
         {title}
       </h4>
       <div
-        className="mt-2 flex gap-3 overflow-x-auto space-x-4 h-40 items-center"
+        className="px-5 flex gap-3 overflow-x-auto space-x-4 h-40 items-center"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
