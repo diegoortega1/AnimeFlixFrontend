@@ -2,22 +2,22 @@ import { useEffect, useState } from "react";
 import { list_animes } from "./fetch";
 
 export function useFetchAnime() {
-  const [animes, setAnime] = useState<any>();
-  const [error, setError] = useState(null);
+  const [animes, setAnimes] = useState<any>();
+  const [errors, setErrors] = useState(null);
   useEffect(() => {
     console.log("Fetch animes ejecutado");
 
     const fetchAnime = async () => {
       try {
         const response = await list_animes();
-        setAnime(response);
+        setAnimes(response);
       } catch (error: any) {
-        setError(error.message || "Unexpected error");
+        setErrors(error.message || "Unexpected error");
       }
     };
 
     fetchAnime();
   }, []);
 
-  return { animes, error };
+  return { animes, errors };
 }
