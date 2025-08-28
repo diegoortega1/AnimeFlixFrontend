@@ -8,8 +8,8 @@ import { useFetchFavoritesAnimes } from "./useFetchFavoritesAnimes";
 
 function App() {
   const { animes, errors } = useFetchAnime();
-  const { favorites, errorsFavorites } = useFetchFavorites();
-  const { animesFavorites, errorsAnimesFavorites, refetchFavorites } =
+  const { favorites, errorsFavorites, refetchFavorites } = useFetchFavorites();
+  const { animesFavorites, errorsAnimesFavorites, refetchAnimesFavorites } =
     useFetchFavoritesAnimes();
 
   if (errors || errorsFavorites || errorsAnimesFavorites) {
@@ -29,6 +29,7 @@ function App() {
             title="Tus favoritos"
             animes={animesFavorites}
             favorites={favorites}
+            refetchAnimesFavorites={refetchAnimesFavorites}
             refetchFavorites={refetchFavorites}
           />
         ) : null}
@@ -36,24 +37,28 @@ function App() {
           title="Los mas vistos"
           animes={animes.top}
           favorites={favorites}
+          refetchAnimesFavorites={refetchAnimesFavorites}
           refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="Mejor valorados"
           animes={animes.bypopularity}
           favorites={favorites}
+          refetchAnimesFavorites={refetchAnimesFavorites}
           refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="Se estrenan proximamente Animeflix"
           animes={animes.upcoming}
           favorites={favorites}
+          refetchAnimesFavorites={refetchAnimesFavorites}
           refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="En emisión"
           animes={animes.airing}
           favorites={favorites}
+          refetchAnimesFavorites={refetchAnimesFavorites}
           refetchFavorites={refetchFavorites}
         />
       </div>

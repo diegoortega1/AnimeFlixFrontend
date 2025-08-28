@@ -3,11 +3,13 @@ import { unset_favorites } from "./fetch";
 
 interface Props {
   id: number;
+  refetchAnimesFavorites: any;
   refetchFavorites: any;
 }
 
 export async function useFetchUnsetFavoriteAnime({
   id,
+  refetchAnimesFavorites,
   refetchFavorites,
 }: Props): Promise<void> {
   try {
@@ -17,6 +19,7 @@ export async function useFetchUnsetFavoriteAnime({
       toast.success("Eliminado de favoritos", {
         description: "El anime se ha eliminado con éxito.",
       });
+      refetchAnimesFavorites();
       refetchFavorites();
     } else {
       handleError("Error al eliminar el anime de favoritos.");

@@ -21,6 +21,6 @@ export function useFetchFavoritesAnimes() {
   return {
     animesFavorites,
     errorsAnimesFavorites,
-    refetchFavorites: fetchAnime,
+    refetchAnimesFavorites: fetchAnime,
   };
 }

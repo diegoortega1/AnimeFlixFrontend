@@ -3,11 +3,13 @@ import { set_favorites } from "./fetch";
 
 interface Props {
   id: number;
+  refetchAnimesFavorites: any;
   refetchFavorites: any;
 }
 
 export async function useFetchSetFavoriteAnime({
   id,
+  refetchAnimesFavorites,
   refetchFavorites,
 }: Props): Promise<void> {
   try {
@@ -17,6 +19,7 @@ export async function useFetchSetFavoriteAnime({
       toast.success("Añadido a favoritos", {
         description: "El anime se ha añadido con éxito.",
       });
+      refetchAnimesFavorites();
       refetchFavorites();
     } else {
       handleError("Error al añadir el anime a favoritos.");

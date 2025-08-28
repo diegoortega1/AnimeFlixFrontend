@@ -6,6 +6,7 @@ interface Props {
   title: string;
   animes: Anime[];
   favorites: AnimeFavorite[];
+  refetchAnimesFavorites: any;
   refetchFavorites: any;
 }
 
@@ -13,6 +14,7 @@ export function RowContent({
   title,
   animes,
   favorites,
+  refetchAnimesFavorites,
   refetchFavorites,
 }: Props) {
   return (
@@ -32,6 +34,7 @@ export function RowContent({
             key={anime.id}
             anime={anime}
             favorites={favorites}
+            refetchAnimesFavorites={refetchAnimesFavorites}
             refetchFavorites={refetchFavorites}
           />
         ))}

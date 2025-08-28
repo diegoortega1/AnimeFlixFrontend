@@ -17,20 +17,28 @@ import { useFetchSetFavoriteAnime } from "./useFetchSetFavoriteAnime";
 interface Props {
   anime: Anime;
   favorites: AnimeFavorite[];
+  refetchAnimesFavorites: any;
   refetchFavorites: any;
 }
 
-export function CardModal({ anime, favorites, refetchFavorites }: Props) {
+export function CardModal({
+  anime,
+  favorites,
+  refetchAnimesFavorites,
+  refetchFavorites,
+}: Props) {
   const isFavorite = favorites.some((favorite) => favorite.id === anime.id);
   function handleFavorite() {
     if (isFavorite) {
       useFetchUnsetFavoriteAnime({
         id: anime.id,
+        refetchAnimesFavorites: refetchAnimesFavorites,
         refetchFavorites: refetchFavorites,
       });
     } else {
       useFetchSetFavoriteAnime({
         id: anime.id,
+        refetchAnimesFavorites: refetchAnimesFavorites,
         refetchFavorites: refetchFavorites,
       });
     }
