@@ -24,8 +24,8 @@ export function mapResponseAnimeDtoToResponseAnime(
     top: Array.isArray(animeResponseDTO.top)
       ? animeResponseDTO.top.map(mapAnimeDtoToAnime)
       : [],
-    favorite: Array.isArray(animeResponseDTO.favorite)
-      ? animeResponseDTO.favorite.map(mapAnimeDtoToAnime)
+    bypopularity: Array.isArray(animeResponseDTO.bypopularity)
+      ? animeResponseDTO.bypopularity.map(mapAnimeDtoToAnime)
       : [],
     upcoming: Array.isArray(animeResponseDTO.upcoming)
       ? animeResponseDTO.upcoming.map(mapAnimeDtoToAnime)

@@ -10,7 +10,6 @@ export function useFetchFavoritesAnimes() {
       try {
         const response = await get_favorite_anime_details();
         console.log("Fetch animes ejecutado", response);
-
         setAnimesFavorites(response);
       } catch (error: any) {
         setErrorsAnimesFavorites(error.message || "Unexpected error");

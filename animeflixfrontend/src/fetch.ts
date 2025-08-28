@@ -30,16 +30,34 @@ export async function list_favorites(): Promise<AnimeFavorite[]> {
   return data;
 }
 
+export async function set_favorites(id: number): Promise<any> {
+  console.log("envio id: ", id);
+  const response = await fetch("http://localhost:8000/favorites", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+
+  const data = await response.json();
+  console.log("set fav", data);
+
+  if (response.status !== 200)
+    throw new Error(data.detail || "Error adding favorite");
+  return data;
+}
+
 export interface AnimeResponse {
   airing: Anime[];
-  favorite: Anime[];
+  bypopularity: Anime[];
   top: Anime[];
   upcoming: Anime[];
 }
 
 export interface AnimeResponseDTO {
   airing: AnimeDTO[];
-  favorite: AnimeDTO[];
+  bypopularity: AnimeDTO[];
   top: AnimeDTO[];
   upcoming: AnimeDTO[];
 }

@@ -11,6 +11,7 @@ import { Card } from "./Card";
 import type { Anime } from "./core/Anime";
 import { Heart } from "lucide-react";
 import type { AnimeFavorite } from "./fetch";
+import { useFetchSetFavoriteAnime } from "./useFetchSetFavoriteAnime";
 
 interface Props {
   anime: Anime;
@@ -56,7 +57,7 @@ export function CardModal({ anime, favorites }: Props) {
                   className={`cursor-pointer text-red-500 ${
                     isFavorite ? "fill-red-500" : "fill-transparent"
                   }`}
-                  onClick={() => {}}
+                  onClick={() => useFetchSetFavoriteAnime({ id: anime.id })}
                 />
               </div>
             </DialogTitle>

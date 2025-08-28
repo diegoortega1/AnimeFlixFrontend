@@ -8,8 +8,6 @@ export function useFetchAnime() {
     const fetchAnime = async () => {
       try {
         const response = await list_animes();
-        console.log("Fetch animes ejecutado", response);
-
         setAnimes(response);
       } catch (error: any) {
         setErrors(error.message || "Unexpected error");
