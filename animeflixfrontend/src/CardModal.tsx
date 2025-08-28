@@ -51,11 +51,21 @@ export function CardModal({ anime }: Props) {
               {anime.synopsis}
             </DialogDescription>
           </DialogHeader>
+          <div className="flex flex-wrap gap-2">
+            {anime.genres?.map((genre) => (
+              <span
+                key={genre}
+                className="inline-block bg-indigo-600 text-white text-xs font-medium px-3 py-1 rounded-full select-none"
+              >
+                {genre}
+              </span>
+            ))}
+          </div>
 
           <div className="flex gap-4 text-sm text-muted-foreground">
-            <span>Episodes: {anime.episodes}</span>
-            <span>Score: {anime.score}</span>
-            <span>Year: {anime.year}</span>
+            <span>Episodes: {anime.episodes ? anime.episodes : "-"}</span>
+            <span>Score: {anime.score ? anime.score : "-"}</span>
+            <span>Year: {anime.year ? anime.year : "-"}</span>
           </div>
 
           <DialogFooter className="pt-4">
