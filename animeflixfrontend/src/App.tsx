@@ -1,11 +1,29 @@
+import { Search } from "lucide-react";
+import { Button } from "./components/ui/button";
 import "./globals.css";
-import { Button } from "@/components/ui/button";
 
 function App() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <button>eo</button>
-      <Button variant={"destructive"}>Click me</Button>
+    <div className="flex p-4 justify-between">
+      <h1
+        className={
+          "text-4xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-lg"
+        }
+      >
+        Animeflix
+      </h1>
+      <div className="flex items-center">
+        <Button className="text-white" variant="ghost">
+          Series
+        </Button>
+        <Button className="text-white" variant="ghost">
+          Peliculas
+        </Button>
+        <Button className="text-white" variant="ghost">
+          <Search />
+          Buscar
+        </Button>
+      </div>
     </div>
   );
 }
