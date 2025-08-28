@@ -13,6 +13,9 @@ export function Header() {
       </h1>
       <div className="flex items-center">
         <Button className="text-white" variant="ghost">
+          Inicio
+        </Button>
+        <Button className="text-white" variant="ghost">
           Series
         </Button>
         <Button className="text-white" variant="ghost">
