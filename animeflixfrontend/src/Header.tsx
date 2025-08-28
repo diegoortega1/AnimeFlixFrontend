@@ -6,7 +6,7 @@ export function Header() {
     <div className="flex p-4 justify-between">
       <h1
         className={
-          "text-4xl md:text-4xl font-extrabold text-white tracking-tight drop-shadow-lg"
+          "text-4xl md:text-4xl font-extrabold text-red-600 tracking-tight drop-shadow-lg"
         }
       >
         Animeflix
