@@ -1,25 +1,25 @@
 import { toast } from "sonner";
-import { set_favorites } from "./fetch";
+import { unset_favorites } from "./fetch";
 
 interface Props {
   id: number;
   refetchFavorites: any;
 }
 
-export async function useFetchSetFavoriteAnime({
+export async function useFetchUnsetFavoriteAnime({
   id,
   refetchFavorites,
 }: Props): Promise<void> {
   try {
-    const response = await set_favorites(id);
+    const response = await unset_favorites(id);
 
     if (response.success) {
-      toast.success("Añadido a favoritos", {
-        description: "El anime se ha añadido con éxito.",
+      toast.success("Eliminado de favoritos", {
+        description: "El anime se ha eliminado con éxito.",
       });
       refetchFavorites();
     } else {
-      handleError("Error al añadir el anime a favoritos.");
+      handleError("Error al eliminar el anime de favoritos.");
     }
   } catch (err: unknown) {
     const errorMessage =
@@ -29,7 +29,7 @@ export async function useFetchSetFavoriteAnime({
 }
 
 function handleError(message: string): void {
-  toast.error("Error al añadir anime", {
+  toast.error("Error al eliminar anime", {
     description: message,
   });
 }

@@ -5,19 +5,22 @@ import type { Anime } from "./core/Anime";
 export function useFetchFavoritesAnimes() {
   const [animesFavorites, setAnimesFavorites] = useState<Anime[]>();
   const [errorsAnimesFavorites, setErrorsAnimesFavorites] = useState(null);
-  useEffect(() => {
-    const fetchAnime = async () => {
-      try {
-        const response = await get_favorite_anime_details();
-        console.log("Fetch animes ejecutado", response);
-        setAnimesFavorites(response);
-      } catch (error: any) {
-        setErrorsAnimesFavorites(error.message || "Unexpected error");
-      }
-    };
+  async function fetchAnime() {
+    try {
+      const response = await get_favorite_anime_details();
+      setAnimesFavorites(response);
+    } catch (error: any) {
+      setErrorsAnimesFavorites(error.message || "Unexpected error");
+    }
+  }
 
+  useEffect(() => {
     fetchAnime();
   }, []);
 
-  return { animesFavorites, errorsAnimesFavorites };
+  return {
+    animesFavorites,
+    errorsAnimesFavorites,
+    refetchFavorites: fetchAnime,
+  };
 }

@@ -6,9 +6,15 @@ interface Props {
   title: string;
   animes: Anime[];
   favorites: AnimeFavorite[];
+  refetchFavorites: any;
 }
 
-export function RowContent({ title, animes, favorites }: Props) {
+export function RowContent({
+  title,
+  animes,
+  favorites,
+  refetchFavorites,
+}: Props) {
   return (
     <div className="p-2">
       <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-white">
@@ -22,7 +28,12 @@ export function RowContent({ title, animes, favorites }: Props) {
         }}
       >
         {animes.map((anime) => (
-          <CardModal key={anime.id} anime={anime} favorites={favorites} />
+          <CardModal
+            key={anime.id}
+            anime={anime}
+            favorites={favorites}
+            refetchFavorites={refetchFavorites}
+          />
         ))}
       </div>
     </div>

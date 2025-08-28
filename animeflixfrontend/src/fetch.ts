@@ -31,7 +31,6 @@ export async function list_favorites(): Promise<AnimeFavorite[]> {
 }
 
 export async function set_favorites(id: number): Promise<any> {
-  console.log("envio id: ", id);
   const response = await fetch("http://localhost:8000/favorites", {
     method: "POST",
     headers: {
@@ -45,6 +44,24 @@ export async function set_favorites(id: number): Promise<any> {
 
   if (response.status !== 200)
     throw new Error(data.detail || "Error adding favorite");
+  return data;
+}
+
+export async function unset_favorites(id: number): Promise<any> {
+  console.log("envio id: ", id);
+  const response = await fetch("http://localhost:8000/favorites", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ id }),
+  });
+
+  const data = await response.json();
+  console.log("set fav", data);
+
+  if (response.status !== 200)
+    throw new Error(data.detail || "Error deleting favorite");
   return data;
 }
 

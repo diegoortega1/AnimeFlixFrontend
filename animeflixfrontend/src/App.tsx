@@ -1,32 +1,17 @@
-import { useEffect, useState } from "react";
 import "./globals.css";
 import { Header } from "./Header";
 import { LoaderScreen } from "./LoaderScreen";
 import { RowContent } from "./RowContent";
 import { useFetchAnime } from "./useFetchAnimes";
 import { useFetchFavorites } from "./useFetchFavorites";
-import { get_favorite_anime_details } from "./fetch";
-import type { Anime } from "./core/Anime";
+import { useFetchFavoritesAnimes } from "./useFetchFavoritesAnimes";
 
 function App() {
   const { animes, errors } = useFetchAnime();
   const { favorites, errorsFavorites } = useFetchFavorites();
-  const [animesFavorites, setAnimesFavorites] = useState<Anime[]>();
-  const [errorsAnimesFavorites, setErrorsAnimesFavorites] = useState(null);
+  const { animesFavorites, errorsAnimesFavorites, refetchFavorites } =
+    useFetchFavoritesAnimes();
 
-  useEffect(() => {
-    if (!animes) return;
-
-    async function fetchAnimesFavorites() {
-      try {
-        const response = await get_favorite_anime_details();
-        setAnimesFavorites(response);
-      } catch (error: any) {
-        setErrorsAnimesFavorites(error.message || "Unexpected error");
-      }
-    }
-    fetchAnimesFavorites();
-  }, [animes]);
   if (errors || errorsFavorites || errorsAnimesFavorites) {
     return <div className="text-white">Ups... Algo salió mal</div>;
   }
@@ -44,27 +29,32 @@ function App() {
             title="Tus favoritos"
             animes={animesFavorites}
             favorites={favorites}
+            refetchFavorites={refetchFavorites}
           />
         ) : null}
         <RowContent
           title="Los mas vistos"
           animes={animes.top}
           favorites={favorites}
+          refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="Mejor valorados"
           animes={animes.bypopularity}
           favorites={favorites}
+          refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="Se estrenan proximamente Animeflix"
           animes={animes.upcoming}
           favorites={favorites}
+          refetchFavorites={refetchFavorites}
         />
         <RowContent
           title="En emisión"
           animes={animes.airing}
           favorites={favorites}
+          refetchFavorites={refetchFavorites}
         />
       </div>
     </div>
