@@ -78,7 +78,7 @@ export async function register_user(user: User): Promise<any> {
   const data = await response.json();
 
   if (response.status !== 200)
-    throw new Error(data.detail || "Error in register");
+    throw new Error(data.message || "Error in register");
   return data;
 }
 export async function list_user(user: User): Promise<any> {
@@ -94,7 +94,7 @@ export async function list_user(user: User): Promise<any> {
   console.log("set user", data);
 
   if (response.status !== 200)
-    throw new Error(data.detail || "Error in register");
+    throw new Error(data.message || "Error in register");
   return data;
 }
 

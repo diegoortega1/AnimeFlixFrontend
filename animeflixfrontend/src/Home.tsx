@@ -6,7 +6,7 @@ import { useFetchAnime } from "./useFetchAnimes";
 import { useFetchFavorites } from "./useFetchFavorites";
 import { useFetchFavoritesAnimes } from "./useFetchFavoritesAnimes";
 
-function App() {
+function Home() {
   const { animes, errors } = useFetchAnime();
   const { favorites, errorsFavorites, refetchFavorites } = useFetchFavorites();
   const { animesFavorites, errorsAnimesFavorites, refetchAnimesFavorites } =
@@ -66,4 +66,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;

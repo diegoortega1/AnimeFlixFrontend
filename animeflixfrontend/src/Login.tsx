@@ -4,8 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRegisterUser } from "./useRegisterUser";
 import { useLoginUser } from "./useLoginUser";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistration, setIsRegistration] = useState(false);
@@ -15,7 +18,8 @@ export function Login() {
     if (isRegistration) {
       useRegisterUser({ username, password });
     } else {
-      useLoginUser({ username, password });
+      const user = { username, password };
+      useLoginUser({ user, navigate });
     }
     console.log(isRegistration ? "Register" : "Login", {
       username,
