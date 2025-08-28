@@ -1,13 +1,14 @@
 import { CardModal } from "./CardModal";
 import type { Anime } from "./core/Anime";
+import type { AnimeFavorite } from "./fetch";
 
 interface Props {
   title: string;
   animes: Anime[];
+  favorites: AnimeFavorite[];
 }
 
-export function RowContent({ title, animes }: Props) {
-  console.log("anime ", animes);
+export function RowContent({ title, animes, favorites }: Props) {
   return (
     <div className="p-2">
       <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-white">
@@ -21,7 +22,7 @@ export function RowContent({ title, animes }: Props) {
         }}
       >
         {animes.map((anime) => (
-          <CardModal key={anime.id} anime={anime} />
+          <CardModal key={anime.id} anime={anime} favorites={favorites} />
         ))}
       </div>
     </div>

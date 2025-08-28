@@ -10,17 +10,15 @@ import {
 import { Card } from "./Card";
 import type { Anime } from "./core/Anime";
 import { Heart } from "lucide-react";
-import { useState } from "react";
+import type { AnimeFavorite } from "./fetch";
 
 interface Props {
   anime: Anime;
+  favorites: AnimeFavorite[];
 }
 
-export function CardModal({ anime }: Props) {
-  console.log("animefinal", anime);
-
-  const [liked, setLiked] = useState(false);
-
+export function CardModal({ anime, favorites }: Props) {
+  const isFavorite = favorites.some((favorite) => favorite.id === anime.id);
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -56,9 +54,9 @@ export function CardModal({ anime }: Props) {
                 {anime.title}
                 <Heart
                   className={`cursor-pointer text-red-500 ${
-                    liked ? "fill-red-500" : "fill-transparent"
+                    isFavorite ? "fill-red-500" : "fill-transparent"
                   }`}
-                  onClick={() => setLiked(!liked)}
+                  onClick={() => {}}
                 />
               </div>
             </DialogTitle>
