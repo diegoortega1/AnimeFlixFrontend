@@ -1,3 +1,5 @@
+import { Card } from "./Card";
+
 interface Props {
   title: string;
 }
@@ -9,62 +11,21 @@ export function RowContent({ title }: Props) {
         {title}
       </h4>
       <div
-        className="mt-2 flex gap-3 overflow-x-auto space-x-4"
+        className="mt-2 flex gap-3 overflow-x-auto space-x-4 h-40 items-center"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
         }}
       >
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/3/72078.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1935/127974.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1935/127974.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1935/127974.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1935/127974.jpg"
-        />
-        <img
-          alt="Anime banner"
-          className="min-w-60 h-32 object-cover rounded"
-          src="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg"
-        />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1935/127974.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1935/127974.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
+        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col p-4 gap-6">
+      <div className="flex flex-col p-4 ">
         <RowContent title="Los mas vistos" />
         <RowContent title="Recomendados" />
         <RowContent title="Nuevo en Animeflix" />
