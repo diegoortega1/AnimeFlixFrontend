@@ -1,5 +1,6 @@
 import type { Anime } from "./core/Anime";
 import type { AnimeDTO } from "./core/AnimeDTO";
+import type { User } from "./core/User";
 import {
   mapAnimeDtoToAnime,
   mapResponseAnimeDtoToResponseAnime,
@@ -62,6 +63,38 @@ export async function unset_favorites(id: number): Promise<any> {
 
   if (response.status !== 200)
     throw new Error(data.detail || "Error deleting favorite");
+  return data;
+}
+
+export async function register_user(user: User): Promise<any> {
+  const response = await fetch("http://localhost:8000/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  const data = await response.json();
+
+  if (response.status !== 200)
+    throw new Error(data.detail || "Error in register");
+  return data;
+}
+export async function list_user(user: User): Promise<any> {
+  const response = await fetch("http://localhost:8000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  const data = await response.json();
+  console.log("set user", data);
+
+  if (response.status !== 200)
+    throw new Error(data.detail || "Error in register");
   return data;
 }
 
