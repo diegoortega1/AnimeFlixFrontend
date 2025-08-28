@@ -4,16 +4,18 @@ import { LoaderScreen } from "./LoaderScreen";
 import { RowContent } from "./RowContent";
 import { useFetchAnime } from "./useFetchAnimes";
 import { useFetchFavorites } from "./useFetchFavorites";
+import { useFetchFavoritesAnimes } from "./useFetchFavoritesAnimes";
 
 function App() {
   const { animes, errors } = useFetchAnime();
   const { favorites, errorsFavorites } = useFetchFavorites();
+  const { animesFavorites, errorsAnimesFavorites } = useFetchFavoritesAnimes();
 
-  if (errors || errorsFavorites) {
+  if (errors || errorsFavorites || errorsAnimesFavorites) {
     return <div className="text-white">Ups... Algo salió mal</div>;
   }
 
-  if (!animes || !favorites) {
+  if (!animes || !favorites || !animesFavorites) {
     return <LoaderScreen />;
   }
 
@@ -21,6 +23,13 @@ function App() {
     <div>
       <Header />
       <div className="flex flex-col p-4 ">
+        {animesFavorites ? (
+          <RowContent
+            title="Tus favoritos"
+            animes={animesFavorites}
+            favorites={favorites}
+          />
+        ) : null}
         <RowContent
           title="Los mas vistos"
           animes={animes.top}
