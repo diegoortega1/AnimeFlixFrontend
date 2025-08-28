@@ -3,9 +3,7 @@ export interface Anime {
   url: string;
   title: string;
   episodes: number;
-  duration: string;
   score: number;
-  rank: number;
   synopsis: string;
   year: number;
   genres: string[];
