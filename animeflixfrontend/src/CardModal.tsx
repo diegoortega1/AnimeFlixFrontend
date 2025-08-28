@@ -9,48 +9,63 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Card } from "./Card";
+import type { Anime } from "./core/Anime";
 
 interface Props {
-  animeURL: string;
+  anime: Anime;
 }
-export function CardModal({ animeURL }: Props) {
+
+export function CardModal({ anime }: Props) {
+  console.log("animefinal", anime);
   return (
     <Dialog>
-      <form className="flex items-center">
-        <DialogTrigger asChild>
-          <Button variant="ghost" className="p-0 overflow-visible ">
-            <Card animeURL={animeURL} />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+      <DialogTrigger asChild>
+        <Button variant="ghost" className="p-0 overflow-visible">
+          <Card animeURL={anime.image} />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="min-w-[50vw] max-h-[90vh] overflow-hidden p-0 bg-black text-white border-none">
+        <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+          <iframe
+            src={anime.trailer}
+            title={anime.title}
+            allow="encrypted-media; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          />
+          <div
+            className="absolute bottom-0 left-0 w-full h-full
+               bg-gradient-to-t from-black via-transparent/70 to-transparent
+               pointer-events-none"
+          />
+        </div>
+
+        <div className="px-6 pb-6 space-y-4">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+            <DialogTitle className="text-3xl font-bold">
+              {anime.title}
+            </DialogTitle>
+            <DialogDescription className="text-base text-muted-foreground line-clamp-3">
+              {anime.synopsis}
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4">
-            <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
-              <Input id="name-1" name="name" defaultValue="Pedro Duarte" />
-            </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username-1">Username</Label>
-              <Input id="username-1" name="username" defaultValue="@peduarte" />
-            </div>
+
+          <div className="flex gap-4 text-sm text-muted-foreground">
+            <span>Episodes: {anime.episodes}</span>
+            <span>Score: {anime.score}</span>
+            <span>Year: {anime.year}</span>
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="outline">Cancel</Button>
+
+          <DialogFooter className="pt-4">
+            <DialogClose>
+              <Button variant="default">Salir</Button>
             </DialogClose>
-            <Button type="submit">Save changes</Button>
+            <Button variant="destructive">Añadir a favorito</Button>
           </DialogFooter>
-        </DialogContent>
-      </form>
+        </div>
+      </DialogContent>
     </Dialog>
   );
 }
