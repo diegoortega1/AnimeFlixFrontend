@@ -2,9 +2,11 @@ import { Card } from "./Card";
 
 interface Props {
   title: string;
+  animes: any[];
 }
 
-export function RowContent({ title }: Props) {
+export function RowContent({ title, animes }: Props) {
+  console.log("anime ", animes);
   return (
     <div className="p-2">
       <h4 className="scroll-m-20 text-xl font-semibold tracking-tight text-white">
@@ -17,15 +19,9 @@ export function RowContent({ title }: Props) {
           msOverflowStyle: "none",
         }}
       >
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1935/127974.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1935/127974.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/1517/100633l.jpg" />
-        <Card animeURL="https://cdn.myanimelist.net/images/anime/3/72078.jpg" />
+        {animes.map((anime) => (
+          <Card animeURL={anime.images.jpg.large_image_url} />
+        ))}
       </div>
     </div>
   );

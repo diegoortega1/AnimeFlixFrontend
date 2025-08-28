@@ -4,5 +4,5 @@ export async function list_animes(): Promise<any> {
   console.log("animes", data);
 
   if (r.status !== 200) throw new Error(data.detail);
-  return data;
+  return data.animes.data;
 }

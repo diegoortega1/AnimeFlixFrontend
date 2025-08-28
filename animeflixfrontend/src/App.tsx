@@ -12,10 +12,10 @@ function App() {
     <div>
       <Header />
       <div className="flex flex-col p-4 ">
-        <RowContent title="Los mas vistos" />
-        <RowContent title="Recomendados" />
-        <RowContent title="Nuevo en Animeflix" />
-        <RowContent title="Deportes" />
+        <RowContent title="Los mas vistos" animes={animes} />
+        <RowContent title="Recomendados" animes={animes} />
+        <RowContent title="Nuevo en Animeflix" animes={animes} />
+        <RowContent title="Deportes" animes={animes} />
       </div>
     </div>
   );
