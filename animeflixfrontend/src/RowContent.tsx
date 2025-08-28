@@ -20,7 +20,10 @@ export function RowContent({ title, animes }: Props) {
         }}
       >
         {animes.map((anime) => (
-          <Card animeURL={anime.images.jpg.large_image_url} />
+          <Card
+            key={anime.mal_id}
+            animeURL={anime.images.jpg.large_image_url}
+          />
         ))}
       </div>
     </div>

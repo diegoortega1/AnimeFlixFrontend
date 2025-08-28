@@ -5,6 +5,8 @@ export function useFetchAnime() {
   const [animes, setAnime] = useState<any>();
   const [error, setError] = useState(null);
   useEffect(() => {
+    console.log("Fetch animes ejecutado");
+
     const fetchAnime = async () => {
       try {
         const response = await list_animes();
