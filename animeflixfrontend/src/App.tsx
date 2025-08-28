@@ -1,16 +1,16 @@
 import "./globals.css";
 import { Header } from "./Header";
+import { LoaderScreen } from "./LoaderScreen";
 import { RowContent } from "./RowContent";
 import { useFetchAnime } from "./useFetchAnimes";
 
 function App() {
   const { animes, errors } = useFetchAnime();
   if (errors) {
-    console.log(errors);
     return <div className="text-white">Ups... Algo salió mal</div>;
   }
   if (!animes) {
-    return <div className="text-white">Cargando</div>;
+    return <LoaderScreen />;
   }
   return (
     <div>
