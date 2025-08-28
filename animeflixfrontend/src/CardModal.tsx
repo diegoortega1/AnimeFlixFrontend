@@ -28,17 +28,21 @@ export function CardModal({ anime }: Props) {
 
       <DialogContent className="min-w-[50vw] max-h-[90vh] overflow-hidden p-0 bg-black text-white border-none">
         <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
-          <iframe
-            src={anime.trailer}
-            title={anime.title}
-            allow="encrypted-media; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
-          />
+          {anime.trailer ? (
+            <iframe
+              src={anime.trailer}
+              title={anime.title}
+              allow="encrypted-media; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full"
+            />
+          ) : (
+            <img src={anime.image} className="w-full h-full" />
+          )}
           <div
             className="absolute bottom-0 left-0 w-full h-full
-               bg-gradient-to-t from-black via-transparent/70 to-transparent
-               pointer-events-none"
+         bg-gradient-to-t from-black via-transparent/70 to-transparent
+         pointer-events-none"
           />
         </div>
 
