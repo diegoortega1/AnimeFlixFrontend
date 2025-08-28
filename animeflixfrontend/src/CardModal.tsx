@@ -1,16 +1,16 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Card } from "./Card";
 import type { Anime } from "./core/Anime";
+import { Heart } from "lucide-react";
+import { useState } from "react";
 
 interface Props {
   anime: Anime;
@@ -18,6 +18,9 @@ interface Props {
 
 export function CardModal({ anime }: Props) {
   console.log("animefinal", anime);
+
+  const [liked, setLiked] = useState(false);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -49,7 +52,15 @@ export function CardModal({ anime }: Props) {
         <div className="px-6 pb-6 space-y-4">
           <DialogHeader>
             <DialogTitle className="text-3xl font-bold">
-              {anime.title}
+              <div className="flex gap-1 items-center justify-between">
+                {anime.title}
+                <Heart
+                  className={`cursor-pointer text-red-500 ${
+                    liked ? "fill-red-500" : "fill-transparent"
+                  }`}
+                  onClick={() => setLiked(!liked)}
+                />
+              </div>
             </DialogTitle>
             <DialogDescription className="text-base text-muted-foreground line-clamp-3">
               {anime.synopsis}
@@ -71,13 +82,6 @@ export function CardModal({ anime }: Props) {
             <span>Score: {anime.score ? anime.score : "-"}</span>
             <span>Year: {anime.year ? anime.year : "-"}</span>
           </div>
-
-          <DialogFooter className="pt-4">
-            <DialogClose>
-              <Button variant="default">Salir</Button>
-            </DialogClose>
-            <Button variant="destructive">Añadir a favorito</Button>
-          </DialogFooter>
         </div>
       </DialogContent>
     </Dialog>
