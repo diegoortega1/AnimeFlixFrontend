@@ -26,6 +26,7 @@ export default function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </BrowserRouter>
   );
