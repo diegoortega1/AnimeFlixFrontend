@@ -13,6 +13,11 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [isRegistration, setIsRegistration] = useState(false);
 
+  function handleChangeRegistration(isRegistration: boolean) {
+    setIsRegistration(isRegistration);
+    setEmail("");
+    setPassword("");
+  }
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistration) {
@@ -42,7 +47,7 @@ export function Login() {
           <Input
             id="email"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="bg-gray-800 text-white"
@@ -79,7 +84,7 @@ export function Login() {
           <button
             type="button"
             className="text-white hover:underline"
-            onClick={() => setIsRegistration(!isRegistration)}
+            onClick={() => handleChangeRegistration(!isRegistration)}
           >
             {isRegistration ? "Iniciar sesión" : "Regístrate ahora"}
           </button>
