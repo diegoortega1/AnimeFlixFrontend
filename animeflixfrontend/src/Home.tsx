@@ -3,20 +3,18 @@ import { Header } from "./Header";
 import { LoaderScreen } from "./LoaderScreen";
 import { RowContent } from "./RowContent";
 import { useFetchAnime } from "./useFetchAnimes";
-import { useFetchAnimesFavorites } from "./useFetchAnimesFavorites";
+import { useFetchUser } from "./useFetchUser";
 
 function Home() {
   const { animes, errors } = useFetchAnime();
-  const { animesFavorites, errorsAnimesFavorites, refetchAnimesFavorites } =
-    useFetchAnimesFavorites();
+  const { user, fetchUser } = useFetchUser();
 
-  if (errors || errorsAnimesFavorites) {
-    console.log(errors);
-    console.log(errorsAnimesFavorites);
+  console.log("user", user);
+  if (errors) {
     return <div className="text-white">Ups... Algo salió mal</div>;
   }
 
-  if (!animes || !animesFavorites) {
+  if (!animes) {
     return <LoaderScreen />;
   }
 
@@ -24,37 +22,37 @@ function Home() {
     <div>
       <Header />
       <div className="flex flex-col p-4 ">
-        {animesFavorites && animesFavorites.length > 0 ? (
+        {user?.animesFavorites && user?.animesFavorites.length > 0 ? (
           <RowContent
             title="Tus favoritos"
-            animes={animesFavorites}
-            animesFavorites={animesFavorites}
-            refetchAnimesFavorites={refetchAnimesFavorites}
+            animes={user?.animesFavorites}
+            animesFavorites={user?.animesFavorites}
+            refetchAnimesFavorites={fetchUser}
           />
         ) : null}
         <RowContent
           title="Los mas vistos"
           animes={animes.top}
-          animesFavorites={animesFavorites}
-          refetchAnimesFavorites={refetchAnimesFavorites}
+          animesFavorites={user?.animesFavorites || []}
+          refetchAnimesFavorites={fetchUser}
         />
         <RowContent
           title="Mejor valorados"
           animes={animes.bypopularity}
-          animesFavorites={animesFavorites}
-          refetchAnimesFavorites={refetchAnimesFavorites}
+          animesFavorites={user?.animesFavorites || []}
+          refetchAnimesFavorites={fetchUser}
         />
         <RowContent
           title="Se estrenan proximamente Animeflix"
           animes={animes.upcoming}
-          animesFavorites={animesFavorites}
-          refetchAnimesFavorites={refetchAnimesFavorites}
+          animesFavorites={user?.animesFavorites || []}
+          refetchAnimesFavorites={fetchUser}
         />
         <RowContent
           title="En emisión"
           animes={animes.airing}
-          animesFavorites={animesFavorites}
-          refetchAnimesFavorites={refetchAnimesFavorites}
+          animesFavorites={user?.animesFavorites || []}
+          refetchAnimesFavorites={fetchUser}
         />
       </div>
     </div>

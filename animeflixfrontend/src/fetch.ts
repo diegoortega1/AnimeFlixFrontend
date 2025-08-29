@@ -11,18 +11,29 @@ export async function listAnimes(): Promise<AnimeResponse> {
 }
 
 export async function listAnimesFavorites(): Promise<Anime[]> {
-  const response = await fetch("http://localhost:8000/animes/favorites");
+  const token = localStorage.getItem("authToken");
+  if (!token) throw new Error("No auth token found");
+  const response = await fetch("http://localhost:8000/animes/favorites", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const data = await response.json();
+  console.log("data", data);
   if (response.status !== 200) throw new Error(data.detail);
   return data;
 }
 
 export async function addAnimeFavorite(anime: Anime): Promise<any> {
+  const token = localStorage.getItem("authToken");
+  if (!token) throw new Error("No auth token found");
   console.log("anime envio", anime);
   const response = await fetch("http://localhost:8000/animes/favorites", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(anime),
   });
@@ -34,12 +45,15 @@ export async function addAnimeFavorite(anime: Anime): Promise<any> {
 }
 
 export async function deleteAnimeFavorite(id: number): Promise<any> {
+  const token = localStorage.getItem("authToken");
+  if (!token) throw new Error("No auth token found");
   const response = await fetch(
     "http://localhost:8000/animes/favorites/" + { id },
     {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ id }),
     }
@@ -90,7 +104,7 @@ export async function getUser(): Promise<any> {
   });
 
   const data = await response.json();
-  console.log("data", data);
+  console.log("dataUser", data);
   if (!response.ok) {
     throw new Error(data.detail || data.message || "Error fetching user");
   }

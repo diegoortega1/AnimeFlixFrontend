@@ -24,8 +24,7 @@ function Profile() {
   }, [user]);
 
   if (!user || !formData) {
-    console.log("user", user);
-    return <div className="text-white">Ups...Algo salió mal</div>;
+    return <div className="text-white">Cargando...</div>;
   }
   function handleSave() {
     fetchModifyUser(formData!);
