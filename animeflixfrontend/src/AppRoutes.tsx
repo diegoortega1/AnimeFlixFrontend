@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
+import Profile from "./Profile";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const token = localStorage.getItem("authToken");
@@ -16,6 +17,7 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/me" element={<Profile />} />
         <Route
           path="/home"
           element={
