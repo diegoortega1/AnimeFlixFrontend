@@ -1,72 +1,54 @@
 import type { Anime } from "./core/Anime";
 import type { AnimeDTO } from "./core/AnimeDTO";
 import type { User } from "./core/User";
-import {
-  mapAnimeDtoToAnime,
-  mapResponseAnimeDtoToResponseAnime,
-} from "./mapper";
+import { mapResponseAnimeDtoToResponseAnime } from "./mapper";
 
-export async function list_animes(): Promise<AnimeResponse> {
-  const response = await fetch("http://localhost:8000/list_animes");
+export async function listAnimes(): Promise<AnimeResponse> {
+  const response = await fetch("http://localhost:8000/animes");
   const data = await response.json();
-  console.log("top", data);
-
   if (response.status !== 200) throw new Error(data.detail);
   return mapResponseAnimeDtoToResponseAnime(data);
 }
 
-export async function get_favorite_anime_details(): Promise<Anime[]> {
+export async function listAnimesFavorites(): Promise<Anime[]> {
   const response = await fetch("http://localhost:8000/animes/favorites");
   const data = await response.json();
-  if (response.status !== 200) throw new Error(data.detail);
-  return data.map(mapAnimeDtoToAnime);
-}
-
-export async function list_favorites(): Promise<AnimeFavorite[]> {
-  const response = await fetch("http://localhost:8000/favorites");
-  const data = await response.json();
-  console.log("fav", data);
-
   if (response.status !== 200) throw new Error(data.detail);
   return data;
 }
 
-export async function set_favorites(id: number): Promise<any> {
-  const response = await fetch("http://localhost:8000/favorites", {
+export async function addAnimeFavorite(id: number): Promise<any> {
+  const response = await fetch("http://localhost:8000/animes/favorites", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
   });
-
   const data = await response.json();
-  console.log("set fav", data);
-
   if (response.status !== 200)
     throw new Error(data.detail || "Error adding favorite");
   return data;
 }
 
-export async function unset_favorites(id: number): Promise<any> {
-  console.log("envio id: ", id);
-  const response = await fetch("http://localhost:8000/favorites", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ id }),
-  });
-
+export async function deleteAnimeFavorite(id: number): Promise<any> {
+  const response = await fetch(
+    "http://localhost:8000/animes/favorites/" + { id },
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    }
+  );
   const data = await response.json();
-  console.log("set fav", data);
-
   if (response.status !== 200)
     throw new Error(data.detail || "Error deleting favorite");
   return data;
 }
 
-export async function register_user(user: User): Promise<any> {
+export async function registerUser(user: User): Promise<any> {
   const response = await fetch("http://localhost:8000/register", {
     method: "POST",
     headers: {
@@ -74,14 +56,13 @@ export async function register_user(user: User): Promise<any> {
     },
     body: JSON.stringify(user),
   });
-
   const data = await response.json();
-
+  console.log("data", data);
   if (response.status !== 200)
-    throw new Error(data.message || "Error in register");
+    throw new Error(data.detail || data.message || "Error in register");
   return data;
 }
-export async function list_user(user: User): Promise<any> {
+export async function loginUser(user: User): Promise<any> {
   const response = await fetch("http://localhost:8000/login", {
     method: "POST",
     headers: {
@@ -89,12 +70,51 @@ export async function list_user(user: User): Promise<any> {
     },
     body: JSON.stringify(user),
   });
+  const data = await response.json();
+  if (response.status !== 200)
+    throw new Error(data.detail || data.message || "Error in register");
+  return data;
+}
+
+export async function getUser(): Promise<any> {
+  const token = localStorage.getItem("authToken");
+  if (!token) throw new Error("No auth token found");
+
+  const response = await fetch("http://localhost:8000/me", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   const data = await response.json();
-  console.log("set user", data);
+  console.log("data", data);
+  if (!response.ok) {
+    throw new Error(data.detail || data.message || "Error fetching user");
+  }
 
-  if (response.status !== 200)
-    throw new Error(data.message || "Error in register");
+  return data;
+}
+export async function modifyUser(user: User): Promise<any> {
+  const token = localStorage.getItem("authToken");
+  console.log("toke", token);
+  if (!token) throw new Error("No auth token found");
+
+  const response = await fetch("http://localhost:8000/me", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(user),
+  });
+
+  const data = await response.json();
+  console.log("data", data);
+  if (!response.ok) {
+    throw new Error(data.detail || data.message || "Error fetching user");
+  }
+
   return data;
 }
 
@@ -110,9 +130,4 @@ export interface AnimeResponseDTO {
   bypopularity: AnimeDTO[];
   top: AnimeDTO[];
   upcoming: AnimeDTO[];
-}
-
-export interface AnimeFavorite {
-  id: number;
-  isFavorite: boolean;
 }

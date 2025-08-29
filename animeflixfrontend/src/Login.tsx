@@ -9,20 +9,20 @@ import { useNavigate } from "react-router-dom";
 export function Login() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistration, setIsRegistration] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistration) {
-      useRegisterUser({ username, password });
+      useRegisterUser({ email, password });
     } else {
-      const user = { username, password };
+      const user = { email, password };
       useLoginUser({ user, navigate });
     }
     console.log(isRegistration ? "Register" : "Login", {
-      username,
+      email,
       password,
     });
   };
@@ -40,15 +40,15 @@ export function Login() {
         </h1>
 
         <div className="mb-4">
-          <Label htmlFor="username" className="text-white mb-1">
+          <Label htmlFor="email" className="text-white mb-1">
             Correo electrónico
           </Label>
           <Input
-            id="username"
+            id="email"
             type="email"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="bg-gray-800 text-white"
             required
           />
