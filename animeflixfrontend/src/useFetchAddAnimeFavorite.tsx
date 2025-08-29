@@ -1,17 +1,18 @@
 import { toast } from "sonner";
 import { addAnimeFavorite } from "./fetch";
+import type { Anime } from "./core/Anime";
 
 interface Props {
-  id: number;
+  anime: Anime;
   refetchAnimesFavorites: any;
 }
 
 export async function useFetchAddAnimeFavorite({
-  id,
+  anime,
   refetchAnimesFavorites,
 }: Props): Promise<void> {
   try {
-    await addAnimeFavorite(id);
+    await addAnimeFavorite(anime);
     toast.success("Añadido a favoritos", {
       description: "El anime se ha añadido con éxito.",
     });

@@ -17,15 +17,17 @@ export async function listAnimesFavorites(): Promise<Anime[]> {
   return data;
 }
 
-export async function addAnimeFavorite(id: number): Promise<any> {
+export async function addAnimeFavorite(anime: Anime): Promise<any> {
+  console.log("anime envio", anime);
   const response = await fetch("http://localhost:8000/animes/favorites", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id }),
+    body: JSON.stringify(anime),
   });
   const data = await response.json();
+  console.log("falla", data);
   if (response.status !== 200)
     throw new Error(data.detail || "Error adding favorite");
   return data;

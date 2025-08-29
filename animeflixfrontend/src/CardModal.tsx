@@ -29,7 +29,7 @@ export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
       });
     } else {
       useFetchAddAnimeFavorite({
-        id: anime.id,
+        anime: anime,
         refetchAnimesFavorites: refetchAnimesFavorites,
       });
     }
