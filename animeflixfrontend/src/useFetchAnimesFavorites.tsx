@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { get_favorite_anime_details } from "./fetch";
+import { listAnimesFavorites } from "./fetch";
 import type { Anime } from "./core/Anime";
 
-export function useFetchFavoritesAnimes() {
+export function useFetchAnimesFavorites() {
   const [animesFavorites, setAnimesFavorites] = useState<Anime[]>();
   const [errorsAnimesFavorites, setErrorsAnimesFavorites] = useState(null);
   async function fetchAnime() {
     try {
-      const response = await get_favorite_anime_details();
+      const response = await listAnimesFavorites();
       setAnimesFavorites(response);
     } catch (error: any) {
       setErrorsAnimesFavorites(error.message || "Unexpected error");
