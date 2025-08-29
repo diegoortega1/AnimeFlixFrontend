@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { list_animes, type AnimeResponse } from "./fetch";
+import { listAnimes, type AnimeResponse } from "./fetch";
 
 export function useFetchAnime() {
   const [animes, setAnimes] = useState<AnimeResponse>();
@@ -7,7 +7,7 @@ export function useFetchAnime() {
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await list_animes();
+        const response = await listAnimes();
         setAnimes(response);
       } catch (error: any) {
         setErrors(error.message || "Unexpected error");

@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "./components/ui/button";
-import { Search } from "lucide-react";
 
 export function Header() {
+  const navigate = useNavigate();
   return (
     <div className="flex p-4 justify-between">
       <h1
@@ -12,18 +13,22 @@ export function Header() {
         Animeflix
       </h1>
       <div className="flex items-center">
-        <Button className="text-white" variant="ghost">
-          Inicio
+        <Button
+          className="text-white cursor-pointer"
+          variant="ghost"
+          onClick={() => navigate("/home")}
+        >
+          Home
         </Button>
-        <Button className="text-white" variant="ghost">
-          Series
-        </Button>
-        <Button className="text-white" variant="ghost">
-          Peliculas
-        </Button>
-        <Button className="text-white" variant="ghost">
-          <Search />
-          Buscar
+        <Button
+          className="text-white"
+          variant="link"
+          onClick={() => navigate("/me")}
+        >
+          <img
+            className="w-6 h-6 cursor-pointer"
+            src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+          />
         </Button>
       </div>
     </div>

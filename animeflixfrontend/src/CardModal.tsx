@@ -10,36 +10,27 @@ import {
 import { Card } from "./Card";
 import type { Anime } from "./core/Anime";
 import { Heart } from "lucide-react";
-import type { AnimeFavorite } from "./fetch";
-import { useFetchUnsetFavoriteAnime } from "./useFetchUnsetFavoriteAnime";
-import { useFetchSetFavoriteAnime } from "./useFetchSetFavoriteAnime";
+import { useFetchDeleteAnimeFavorite } from "./useFetchDeleteAnimeFavorite";
+import { useFetchAddAnimeFavorite } from "./useFetchAddAnimeFavorite";
 
 interface Props {
   anime: Anime;
-  favorites: AnimeFavorite[];
+  favorites: Anime[];
   refetchAnimesFavorites: any;
-  refetchFavorites: any;
 }
 
-export function CardModal({
-  anime,
-  favorites,
-  refetchAnimesFavorites,
-  refetchFavorites,
-}: Props) {
+export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
   const isFavorite = favorites.some((favorite) => favorite.id === anime.id);
   function handleFavorite() {
     if (isFavorite) {
-      useFetchUnsetFavoriteAnime({
+      useFetchDeleteAnimeFavorite({
         id: anime.id,
         refetchAnimesFavorites: refetchAnimesFavorites,
-        refetchFavorites: refetchFavorites,
       });
     } else {
-      useFetchSetFavoriteAnime({
+      useFetchAddAnimeFavorite({
         id: anime.id,
         refetchAnimesFavorites: refetchAnimesFavorites,
-        refetchFavorites: refetchFavorites,
       });
     }
   }

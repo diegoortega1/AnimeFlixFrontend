@@ -1,21 +1,17 @@
 import { CardModal } from "./CardModal";
 import type { Anime } from "./core/Anime";
-import type { AnimeFavorite } from "./fetch";
-
 interface Props {
   title: string;
   animes: Anime[];
-  favorites: AnimeFavorite[];
+  animesFavorites: Anime[];
   refetchAnimesFavorites: any;
-  refetchFavorites: any;
 }
 
 export function RowContent({
   title,
   animes,
-  favorites,
+  animesFavorites,
   refetchAnimesFavorites,
-  refetchFavorites,
 }: Props) {
   return (
     <div className="p-2">
@@ -33,9 +29,8 @@ export function RowContent({
           <CardModal
             key={anime.id}
             anime={anime}
-            favorites={favorites}
+            favorites={animesFavorites}
             refetchAnimesFavorites={refetchAnimesFavorites}
-            refetchFavorites={refetchFavorites}
           />
         ))}
       </div>
