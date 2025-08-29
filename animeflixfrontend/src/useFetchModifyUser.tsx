@@ -7,7 +7,6 @@ interface Props {
 }
 export function useFetchModifyUser({ fetchUser }: Props) {
   const fetchModifyUser = async (user: User) => {
-    console.log("envio", user);
     try {
       await modifyUser(user);
       toast.success("Cambios realizados", {

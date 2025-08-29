@@ -21,10 +21,6 @@ export function Login() {
       const user = { email, password };
       useLoginUser({ user, navigate });
     }
-    console.log(isRegistration ? "Register" : "Login", {
-      email,
-      password,
-    });
   };
 
   return (

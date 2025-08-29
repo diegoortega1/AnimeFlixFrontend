@@ -20,7 +20,6 @@ export async function listAnimesFavorites(): Promise<Anime[]> {
     },
   });
   const data = await response.json();
-  console.log("data", data);
   if (response.status !== 200) throw new Error(data.detail);
   return data;
 }
@@ -28,7 +27,6 @@ export async function listAnimesFavorites(): Promise<Anime[]> {
 export async function addAnimeFavorite(anime: Anime): Promise<any> {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No auth token found");
-  console.log("anime envio", anime);
   const response = await fetch("http://localhost:8000/animes/favorites", {
     method: "POST",
     headers: {
@@ -38,7 +36,6 @@ export async function addAnimeFavorite(anime: Anime): Promise<any> {
     body: JSON.stringify(anime),
   });
   const data = await response.json();
-  console.log("falla", data);
   if (response.status !== 200)
     throw new Error(data.detail || "Error adding favorite");
   return data;
@@ -73,7 +70,6 @@ export async function registerUser(user: User): Promise<any> {
     body: JSON.stringify(user),
   });
   const data = await response.json();
-  console.log("data", data);
   if (response.status !== 200)
     throw new Error(data.detail || data.message || "Error in register");
   return data;
@@ -104,7 +100,6 @@ export async function getUser(): Promise<any> {
   });
 
   const data = await response.json();
-  console.log("dataUser", data);
   if (!response.ok) {
     throw new Error(data.detail || data.message || "Error fetching user");
   }
@@ -113,7 +108,6 @@ export async function getUser(): Promise<any> {
 }
 export async function modifyUser(user: User): Promise<any> {
   const token = localStorage.getItem("authToken");
-  console.log("toke", token);
   if (!token) throw new Error("No auth token found");
 
   const response = await fetch("http://localhost:8000/me", {
@@ -126,7 +120,6 @@ export async function modifyUser(user: User): Promise<any> {
   });
 
   const data = await response.json();
-  console.log("data", data);
   if (!response.ok) {
     throw new Error(data.detail || data.message || "Error fetching user");
   }

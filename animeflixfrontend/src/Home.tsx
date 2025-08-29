@@ -9,7 +9,6 @@ function Home() {
   const { animes, errors } = useFetchAnime();
   const { user, fetchUser } = useFetchUser();
 
-  console.log("user", user);
   if (errors) {
     return <div className="text-white">Ups... Algo salió mal</div>;
   }

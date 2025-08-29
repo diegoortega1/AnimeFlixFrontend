@@ -9,7 +9,6 @@ export async function useRegisterUser(user: User) {
       description: "El usuario se ha registrado con éxito.",
     });
   } catch (err: unknown) {
-    console.log("erro:", err);
     toast.error("Error al registrarse", {
       description: "Se ha producido un error. " + err,
     });
