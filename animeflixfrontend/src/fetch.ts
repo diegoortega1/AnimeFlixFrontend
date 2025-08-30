@@ -10,20 +10,6 @@ export async function listAnimes(): Promise<AnimeResponse> {
   return mapResponseAnimeDtoToResponseAnime(data);
 }
 
-export async function listAnimesFavorites(): Promise<Anime[]> {
-  const token = localStorage.getItem("authToken");
-  if (!token) throw new Error("No auth token found");
-  const response = await fetch("http://localhost:8000/animes/favorites", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  const data = await response.json();
-  if (response.status !== 200) throw new Error(data.detail);
-  return data;
-}
-
 export async function addAnimeFavorite(anime: Anime): Promise<any> {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No auth token found");
