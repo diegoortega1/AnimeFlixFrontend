@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { addAnimeFavorite } from "../fetch";
+import { addAnimeFavorite } from "../Infraestructure/userApi";
 import type { Anime } from "../core/Domain/Anime";
 
 interface Props {

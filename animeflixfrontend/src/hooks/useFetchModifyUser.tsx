@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import type { User } from "../core/Domain/User";
-import { modifyUser } from "../fetch";
+import { modifyUser } from "../Infraestructure/animeApi";
 
 interface Props {
   fetchUser: any;

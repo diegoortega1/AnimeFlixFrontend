@@ -1,4 +1,4 @@
-import { listAnimes } from "@/fetch";
+import { listAnimes } from "@/Infraestructure/animeApi";
 import type { AnimeRepository } from "../core/Domain/AnimeRepository";
 
 export const JikenApiAnimeRepository: AnimeRepository = {

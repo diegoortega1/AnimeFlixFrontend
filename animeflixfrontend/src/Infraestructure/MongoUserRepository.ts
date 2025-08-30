@@ -3,7 +3,7 @@ import {
   removeAnimeFavorite,
   getUser,
   modifyUser,
-} from "@/fetch";
+} from "@/Infraestructure/userApi";
 import type { UserRepository } from "@/core/Domain/UserRepository";
 import type { User } from "@/core/Domain/User";
 import type { Anime } from "@/core/Domain/Anime";
