@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import type { User } from "../core/Domain/User";
-import { loginUser } from "../Infraestructure/animeApi";
+import { loginUser } from "../Infraestructure/userApi";
 
 interface Props {
   user: User;

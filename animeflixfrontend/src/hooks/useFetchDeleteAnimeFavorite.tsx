@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { removeAnimeFavorite } from "../Infraestructure/animeApi";
+import { removeAnimeFavorite } from "../Infraestructure/userApi";
 
 interface Props {
   id: number;

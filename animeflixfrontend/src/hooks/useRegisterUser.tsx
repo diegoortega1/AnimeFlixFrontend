@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import type { User } from "../core/Domain/User";
-import { registerUser } from "../Infraestructure/animeApi";
+import { registerUser } from "../Infraestructure/userApi";
 
 export async function useRegisterUser(user: User) {
   try {

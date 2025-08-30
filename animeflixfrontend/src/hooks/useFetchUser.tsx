@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { User } from "../core/Domain/User";
-import { getUser } from "../Infraestructure/animeApi";
+import { getUser } from "../Infraestructure/userApi";
 
 export function useFetchUser() {
   const [user, setUser] = useState<User>();
