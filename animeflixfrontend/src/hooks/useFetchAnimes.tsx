@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { JikenApiAnimeRepository } from "./Infraestructure/JikenApiAnimeRepository";
-import type { AnimeByGenreResponse } from "./core/Domain/AnimeByGenreResponse";
+import { JikenApiAnimeRepository } from "../Infraestructure/JikenApiAnimeRepository";
+import type { AnimeByGenreResponse } from "../core/Domain/AnimeByGenreResponse";
 
 export function useFetchAnime() {
   const [animes, setAnimes] = useState<AnimeByGenreResponse>();

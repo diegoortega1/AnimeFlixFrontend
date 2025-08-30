@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { removeAnimeFavorite } from "./fetch";
+import { removeAnimeFavorite } from "../fetch";
 
 interface Props {
   id: number;

@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import type { User } from "./core/Domain/User";
-import { registerUser } from "./fetch";
+import type { User } from "../core/Domain/User";
+import { registerUser } from "../fetch";
 
 export async function useRegisterUser(user: User) {
   try {

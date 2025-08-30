@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import type { User } from "./core/Domain/User";
-import { loginUser } from "./fetch";
+import type { User } from "../core/Domain/User";
+import { loginUser } from "../fetch";
 
 interface Props {
   user: User;

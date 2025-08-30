@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import type { User } from "./core/Domain/User";
-import { getUser } from "./fetch";
+import type { User } from "../core/Domain/User";
+import { getUser } from "../fetch";
 
 export function useFetchUser() {
   const [user, setUser] = useState<User>();
