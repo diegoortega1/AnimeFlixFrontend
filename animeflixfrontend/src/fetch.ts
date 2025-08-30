@@ -3,9 +3,18 @@ import type { AnimeDTO } from "./core/Domain/AnimeDTO";
 import type { User } from "./core/Domain/User";
 import { mapResponseAnimeDtoToResponseAnime } from "./mapper";
 
+function handleUnauthorized() {
+  localStorage.removeItem("authToken");
+  window.location.href = "/login";
+}
+
 export async function listAnimes(): Promise<AnimeResponse> {
   const response = await fetch("http://localhost:8000/animes");
   const data = await response.json();
+  if (response.status === 401) {
+    handleUnauthorized();
+    return { airing: [], bypopularity: [], top: [], upcoming: [] };
+  }
   if (response.status !== 200) throw new Error(data.detail);
   return mapResponseAnimeDtoToResponseAnime(data);
 }
@@ -27,7 +36,7 @@ export async function addAnimeFavorite(anime: Anime): Promise<any> {
   return data;
 }
 
-export async function deleteAnimeFavorite(id: number): Promise<any> {
+export async function removeAnimeFavorite(id: number): Promise<any> {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No auth token found");
   const response = await fetch(
@@ -86,7 +95,11 @@ export async function getUser(): Promise<any> {
   });
 
   const data = await response.json();
-  if (!response.ok) {
+  if (response.status === 401) {
+    handleUnauthorized();
+    return { airing: [], bypopularity: [], top: [], upcoming: [] };
+  }
+  if (response.status !== 200) {
     throw new Error(data.detail || data.message || "Error fetching user");
   }
 
@@ -106,7 +119,7 @@ export async function modifyUser(user: User): Promise<any> {
   });
 
   const data = await response.json();
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error(data.detail || data.message || "Error fetching user");
   }
 
