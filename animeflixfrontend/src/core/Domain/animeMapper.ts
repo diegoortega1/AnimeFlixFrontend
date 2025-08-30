@@ -1,6 +1,6 @@
-import type { Anime } from "./core/Domain/Anime";
-import type { AnimeDTO } from "./core/Domain/AnimeDTO";
-import type { AnimeResponse, AnimeResponseDTO } from "./fetch";
+import type { AnimeResponse, AnimeResponseDTO } from "@/fetch";
+import type { Anime } from "./Anime";
+import type { AnimeDTO } from "./AnimeDTO";
 
 export function mapAnimeDtoToAnime(animeDTO: AnimeDTO): Anime {
   return {
