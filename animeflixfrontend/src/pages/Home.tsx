@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { AnimeService } from "../core/Application/AnimeService";
 import "./globals.css";
-import { Header } from "../Header";
+import { Header } from "../components/Header";
 import { JikenApiAnimeRepository } from "../Infraestructure/JikenApiAnimeRepository";
 import { LoaderScreen } from "../LoaderScreen";
-import { RowContent } from "../RowContent";
+import { RowContent } from "../components/RowContent";
 import type { AnimeByGenreResponse } from "../core/Domain/AnimeByGenreResponse";
 import { UserService } from "../core/Application/UserService";
 import { MongoUserRepository } from "../Infraestructure/MongoUserRepository";

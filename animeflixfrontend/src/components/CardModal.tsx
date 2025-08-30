@@ -8,10 +8,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Card } from "./Card";
-import type { Anime } from "./core/Domain/Anime";
+import type { Anime } from "../core/Domain/Anime";
 import { Heart } from "lucide-react";
-import { useFetchDeleteAnimeFavorite } from "./hooks/useFetchDeleteAnimeFavorite";
-import { useFetchAddAnimeFavorite } from "./hooks/useFetchAddAnimeFavorite";
+import { useFetchDeleteAnimeFavorite } from "../hooks/useFetchDeleteAnimeFavorite";
+import { useFetchAddAnimeFavorite } from "../hooks/useFetchAddAnimeFavorite";
 
 interface Props {
   anime: Anime;
