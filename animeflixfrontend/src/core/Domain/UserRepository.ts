@@ -3,8 +3,7 @@ import type { User } from "./User";
 
 export interface UserRepository {
   listInfo(): Promise<User>;
-  modifyUsername(): Promise<void>;
-  listAnimesFavorites(): Promise<Anime[]>;
+  modifyUsername(user: User): Promise<void>;
   addAnime(anime: Anime): Promise<void>;
-  removeAnime(anime: Anime): Promise<void>;
+  removeAnime(id: number): Promise<void>;
 }

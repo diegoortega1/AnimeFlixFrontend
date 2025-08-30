@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { deleteAnimeFavorite } from "./fetch";
+import { removeAnimeFavorite } from "./fetch";
 
 interface Props {
   id: number;
@@ -11,7 +11,7 @@ export async function useFetchDeleteAnimeFavorite({
   refetchAnimesFavorites,
 }: Props): Promise<void> {
   try {
-    await deleteAnimeFavorite(id);
+    await removeAnimeFavorite(id);
     toast.success("Eliminado de favoritos", {
       description: "El anime se ha eliminado con éxito.",
     });
