@@ -1,14 +1,14 @@
 import type { Anime } from "./core/Domain/Anime";
-import type { AnimeDTO } from "./core/Domain/AnimeDTO";
+import type { AnimeByGenreResponse } from "./core/Domain/AnimeByGenreResponse";
+import { mapResponseAnimeDtoToResponseAnime } from "./core/Domain/animeMapper";
 import type { User } from "./core/Domain/User";
-import { mapResponseAnimeDtoToResponseAnime } from "./mapper";
 
 function handleUnauthorized() {
   localStorage.removeItem("authToken");
   window.location.href = "/login";
 }
 
-export async function listAnimes(): Promise<AnimeResponse> {
+export async function listAnimes(): Promise<AnimeByGenreResponse> {
   const response = await fetch("http://localhost:8000/animes");
   const data = await response.json();
   if (response.status === 401) {
@@ -124,18 +124,4 @@ export async function modifyUser(user: User): Promise<any> {
   }
 
   return data;
-}
-
-export interface AnimeResponse {
-  airing: Anime[];
-  bypopularity: Anime[];
-  top: Anime[];
-  upcoming: Anime[];
-}
-
-export interface AnimeResponseDTO {
-  airing: AnimeDTO[];
-  bypopularity: AnimeDTO[];
-  top: AnimeDTO[];
-  upcoming: AnimeDTO[];
 }

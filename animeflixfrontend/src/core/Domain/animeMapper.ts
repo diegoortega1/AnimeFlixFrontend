@@ -1,5 +1,6 @@
-import type { AnimeResponse, AnimeResponseDTO } from "@/fetch";
 import type { Anime } from "./Anime";
+import type { AnimeByGenreResponse } from "./AnimeByGenreResponse";
+import type { AnimeByGenreResponseDTO } from "./AnimeByGenreResponseDTO";
 import type { AnimeDTO } from "./AnimeDTO";
 
 export function mapAnimeDtoToAnime(animeDTO: AnimeDTO): Anime {
@@ -18,8 +19,8 @@ export function mapAnimeDtoToAnime(animeDTO: AnimeDTO): Anime {
 }
 
 export function mapResponseAnimeDtoToResponseAnime(
-  animeResponseDTO: AnimeResponseDTO
-): AnimeResponse {
+  animeResponseDTO: AnimeByGenreResponseDTO
+): AnimeByGenreResponse {
   return {
     top: Array.isArray(animeResponseDTO.top)
       ? animeResponseDTO.top.map(mapAnimeDtoToAnime)

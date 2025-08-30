@@ -1,6 +1,6 @@
 import type { AnimeDTO } from "./AnimeDTO";
 
-export interface AnimeByGenreResponse {
+export interface AnimeByGenreResponseDTO {
   airing: AnimeDTO[];
   bypopularity: AnimeDTO[];
   top: AnimeDTO[];
