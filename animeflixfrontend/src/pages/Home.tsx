@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { AnimeService } from "./core/Application/AnimeService";
+import { AnimeService } from "../core/Application/AnimeService";
 import "./globals.css";
-import { Header } from "./Header";
-import { JikenApiAnimeRepository } from "./Infraestructure/JikenApiAnimeRepository";
-import { LoaderScreen } from "./LoaderScreen";
-import { RowContent } from "./RowContent";
-import type { AnimeByGenreResponse } from "./core/Domain/AnimeByGenreResponse";
-import { UserService } from "./core/Application/UserService";
-import { MongoUserRepository } from "./Infraestructure/MongoUserRepository";
-import type { User } from "./core/Domain/User";
+import { Header } from "../Header";
+import { JikenApiAnimeRepository } from "../Infraestructure/JikenApiAnimeRepository";
+import { LoaderScreen } from "../LoaderScreen";
+import { RowContent } from "../RowContent";
+import type { AnimeByGenreResponse } from "../core/Domain/AnimeByGenreResponse";
+import { UserService } from "../core/Application/UserService";
+import { MongoUserRepository } from "../Infraestructure/MongoUserRepository";
+import type { User } from "../core/Domain/User";
 
 function Home() {
   const [animes, setAnimes] = useState<AnimeByGenreResponse>();

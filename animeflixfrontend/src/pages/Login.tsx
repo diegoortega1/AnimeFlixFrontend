@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRegisterUser } from "./useRegisterUser";
-import { useLoginUser } from "./useLoginUser";
+import { useRegisterUser } from "../useRegisterUser";
+import { useLoginUser } from "../useLoginUser";
 import { useNavigate } from "react-router-dom";
 
 export function Login() {
