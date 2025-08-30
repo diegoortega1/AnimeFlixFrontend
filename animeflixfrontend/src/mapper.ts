@@ -1,5 +1,5 @@
-import type { Anime } from "./core/Anime";
-import type { AnimeDTO } from "./core/AnimeDTO";
+import type { Anime } from "./core/Domain/Anime";
+import type { AnimeDTO } from "./core/Domain/AnimeDTO";
 import type { AnimeResponse, AnimeResponseDTO } from "./fetch";
 
 export function mapAnimeDtoToAnime(animeDTO: AnimeDTO): Anime {

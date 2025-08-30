@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 import { addAnimeFavorite } from "./fetch";
-import type { Anime } from "./core/Anime";
+import type { Anime } from "./core/Domain/Anime";
 
 interface Props {
   anime: Anime;

@@ -1,6 +1,6 @@
-import type { Anime } from "./core/Anime";
-import type { AnimeDTO } from "./core/AnimeDTO";
-import type { User } from "./core/User";
+import type { Anime } from "./core/Domain/Anime";
+import type { AnimeDTO } from "./core/Domain/AnimeDTO";
+import type { User } from "./core/Domain/User";
 import { mapResponseAnimeDtoToResponseAnime } from "./mapper";
 
 export async function listAnimes(): Promise<AnimeResponse> {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { User } from "./core/User";
+import type { User } from "./core/Domain/User";
 import { getUser } from "./fetch";
 
 export function useFetchUser() {

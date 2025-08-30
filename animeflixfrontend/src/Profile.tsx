@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { EditIcon } from "lucide-react";
 import { Header } from "./Header";
 import { useFetchUser } from "./useFetchUser";
-import type { User } from "./core/User";
+import type { User } from "./core/Domain/User";
 import { useFetchModifyUser } from "./useFetchModifyUser";
 import { useNavigate } from "react-router-dom";
 

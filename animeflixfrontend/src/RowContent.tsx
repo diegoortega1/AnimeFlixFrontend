@@ -1,5 +1,5 @@
 import { CardModal } from "./CardModal";
-import type { Anime } from "./core/Anime";
+import type { Anime } from "./core/Domain/Anime";
 interface Props {
   title: string;
   animes: Anime[];

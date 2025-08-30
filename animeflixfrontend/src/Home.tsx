@@ -1,22 +1,44 @@
+import { useEffect, useState } from "react";
+import { AnimeService } from "./core/Application/AnimeService";
 import "./globals.css";
 import { Header } from "./Header";
+import { JikenApiAnimeRepository } from "./Infraestructure/JikenApiAnimeRepository";
 import { LoaderScreen } from "./LoaderScreen";
 import { RowContent } from "./RowContent";
-import { useFetchAnime } from "./useFetchAnimes";
 import { useFetchUser } from "./useFetchUser";
+import type { AnimeByGenreResponse } from "./core/Domain/AnimeByGenreResponse";
 
 function Home() {
-  const { animes, errors } = useFetchAnime();
+  const [animes, setAnimes] = useState<AnimeByGenreResponse>();
+  const [loading, setLoading] = useState(true);
   const { user, fetchUser } = useFetchUser();
 
-  if (errors) {
-    return <div className="text-white">Ups... Algo salió mal</div>;
-  }
+  useEffect(() => {
+    const fetchAnimes = async () => {
+      try {
+        setLoading(true);
+        const animeData = await AnimeService.listAnimes({
+          animeRepository: JikenApiAnimeRepository,
+        });
+        if (animeData) {
+          setAnimes(animeData);
+        }
+      } catch (error) {
+        console.error("Error fetching animes", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!animes) {
+    fetchAnimes();
+  }, []);
+
+  if (loading) {
     return <LoaderScreen />;
   }
-
+  if (!animes) {
+    return <div>Se ha producido un error</div>;
+  }
   return (
     <div>
       <Header />
