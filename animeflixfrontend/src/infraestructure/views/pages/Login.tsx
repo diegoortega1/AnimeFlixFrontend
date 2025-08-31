@@ -5,7 +5,7 @@ import { Label } from "../components/ui/label";
 import { useNavigate } from "react-router-dom";
 import type { User } from "@/domain/models/User";
 import { AuthService } from "@/application/AuthService";
-import { HttpAuthRepository } from "@/infra/HttpAuthRepository";
+import { HttpAuthRepository } from "@/infraestructure/HttpAuthRepository";
 import { toast } from "sonner";
 
 export function Login() {

@@ -2,8 +2,8 @@ import { AnimeService } from "@/application/AnimeService";
 import { UserService } from "@/application/UserService";
 import type { AnimeByGenreResponse } from "@/domain/models/AnimeByGenreResponse";
 import type { User } from "@/domain/models/User";
-import { HttpAnimeRepository } from "@/infra/HttpAnimeRepository";
-import { HttpUserRepository } from "@/infra/HttpUserRepository";
+import { HttpAnimeRepository } from "@/infraestructure/HttpAnimeRepository";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
 import { useEffect, useState } from "react";
 
 export function useHomeLoad() {

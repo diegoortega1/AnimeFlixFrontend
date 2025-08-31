@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { User } from "@/domain/models/User";
 import { UserService } from "@/application/UserService";
-import { HttpUserRepository } from "@/infra/HttpUserRepository";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
 
 export function useFetchUser() {
   const [user, setUser] = useState<User>();

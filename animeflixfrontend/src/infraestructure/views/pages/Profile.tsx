@@ -10,7 +10,7 @@ import { useFetchUser } from "../hooks/useFetchUser";
 import { useNavigate } from "react-router-dom";
 import type { User } from "@/domain/models/User";
 import { UserService } from "@/application/UserService";
-import { HttpUserRepository } from "@/infra/HttpUserRepository";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
 import { toast } from "sonner";
 
 function Profile() {
