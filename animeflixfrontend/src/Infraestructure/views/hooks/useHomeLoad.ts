@@ -35,7 +35,6 @@ export function useHomeLoad() {
       });
       if (userData) {
         setUser(userData);
-        console.log("userData", userData);
       }
     } catch (error) {
       console.error("Error fetching user info", error);

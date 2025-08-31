@@ -21,7 +21,6 @@ interface Props {
 }
 
 export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
-  console.log("recargo", favorites);
   const isFavorite = favorites.some((favorite) => favorite.id === anime.id);
   function handleFavorite() {
     if (isFavorite) {
