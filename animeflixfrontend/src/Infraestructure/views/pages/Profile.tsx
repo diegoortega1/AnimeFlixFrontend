@@ -7,15 +7,17 @@ import { Label } from "../components/ui/label";
 import { EditIcon } from "lucide-react";
 import { Header } from "../components/Header";
 import { useFetchUser } from "../hooks/useFetchUser";
-import { useFetchModifyUser } from "../hooks/useFetchModifyUser";
 import { useNavigate } from "react-router-dom";
 import type { User } from "@/domain/models/User";
+import { UserService } from "@/application/UserService";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
+import { toast } from "sonner";
 
 function Profile() {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState<User>();
   const { user, fetchUser } = useFetchUser();
-  const { fetchModifyUser } = useFetchModifyUser({ fetchUser });
+  const { fetchModifyUser } = modifyUser({ fetchUser });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -127,6 +129,31 @@ function Profile() {
       </div>
     </div>
   );
+}
+
+interface ModifyUser {
+  fetchUser: any;
+}
+
+function modifyUser({ fetchUser }: ModifyUser) {
+  const fetchModifyUser = async (user: User) => {
+    try {
+      await UserService.modifyUser({
+        userRepository: HttpUserRepository,
+        user,
+      });
+      toast.success("Cambios realizados", {
+        description: "Cambios realizados con éxito.",
+      });
+      fetchUser();
+    } catch (error: any) {
+      toast.error("Error al realizar cambios", {
+        description: "Se ha producido un error. " + error,
+      });
+    }
+  };
+
+  return { fetchModifyUser };
 }
 
 export default Profile;

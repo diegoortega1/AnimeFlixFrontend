@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { useRegisterUser } from "../hooks/useRegisterUser";
-import { useLoginUser } from "../hooks/useLoginUser";
 import { useNavigate } from "react-router-dom";
+import type { User } from "@/domain/models/User";
+import { AuthService } from "@/application/AuthService";
+import { HttpAuthRepository } from "@/infraestructure/HttpAuthRepository";
+import { toast } from "sonner";
 
 export function Login() {
   const navigate = useNavigate();
@@ -22,10 +24,10 @@ export function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistration) {
-      useRegisterUser({ email, password });
+      registerUser({ email, password });
     } else {
       const user = { email, password };
-      useLoginUser({ user, navigate });
+      loginUser({ user, navigate });
     }
   };
 
@@ -93,6 +95,41 @@ export function Login() {
       </form>
     </div>
   );
+}
+
+interface LoginUser {
+  user: User;
+  navigate: any;
+}
+async function loginUser({ user, navigate }: LoginUser) {
+  try {
+    const response = await AuthService.login({
+      authRepository: HttpAuthRepository,
+      user,
+    });
+    localStorage.setItem("authToken", response.token);
+    navigate("/home");
+  } catch (err: unknown) {
+    toast.error("Error al iniciar sesión", {
+      description: "Se ha producido un error. " + err,
+    });
+  }
+}
+
+async function registerUser(user: User) {
+  try {
+    await AuthService.register({
+      authRepository: HttpAuthRepository,
+      user,
+    });
+    toast.success("Usuario registrado", {
+      description: "El usuario se ha registrado con éxito.",
+    });
+  } catch (err: unknown) {
+    toast.error("Error al registrarse", {
+      description: "Se ha producido un error. " + err,
+    });
+  }
 }
 
 export default Login;
