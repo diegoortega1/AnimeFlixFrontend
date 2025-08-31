@@ -1,56 +1,11 @@
-import { useEffect, useState } from "react";
-import { AnimeService } from "../../../application/AnimeService";
 import "../../../globals.css";
 import { Header } from "../components/Header";
-import { HttpAnimeRepository } from "../../HttpAnimeRepository";
 import { LoaderScreen } from "../components/LoaderScreen";
 import { RowContent } from "../components/RowContent";
-import type { AnimeByGenreResponse } from "../../../domain/models/AnimeByGenreResponse";
-import { UserService } from "../../../application/UserService";
-import { HttpUserRepository } from "../../HttpUserRepository";
-import type { User } from "@/domain/models/User";
+import { useHomeLoad } from "../hooks/useHomeLoad";
 
 function Home() {
-  const [animes, setAnimes] = useState<AnimeByGenreResponse>();
-  const [user, setUser] = useState<User>();
-  const [loading, setLoading] = useState(true);
-  const [loading2, setLoading2] = useState(true);
-
-  async function fetchAnimes() {
-    try {
-      setLoading(true);
-      const animeData = await AnimeService.listAnimes({
-        animeRepository: HttpAnimeRepository,
-      });
-      if (animeData) {
-        setAnimes(animeData);
-      }
-    } catch (error) {
-      console.error("Error fetching animes", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-  async function fetchUser() {
-    try {
-      setLoading2(true);
-      const userData = await UserService.listInfo({
-        userRepository: HttpUserRepository,
-      });
-      if (userData) {
-        setUser(userData);
-        console.log("userData", userData);
-      }
-    } catch (error) {
-      console.error("Error fetching user info", error);
-    } finally {
-      setLoading2(false);
-    }
-  }
-  useEffect(() => {
-    fetchAnimes();
-    fetchUser();
-  }, []);
+  const { user, animes, loading, loading2, fetchUser } = useHomeLoad();
   if (loading || loading2) {
     return <LoaderScreen />;
   }
@@ -63,32 +18,32 @@ function Home() {
       <div className="flex flex-col p-4 ">
         {user?.animesFavorites && user?.animesFavorites.length > 0 ? (
           <RowContent
-            title="Tus favoritos"
+            title="Your favorites"
             animes={user?.animesFavorites}
             animesFavorites={user?.animesFavorites}
             refetchAnimesFavorites={fetchUser}
           />
         ) : null}
         <RowContent
-          title="Los mas vistos"
+          title="Most viewed"
           animes={animes.top}
           animesFavorites={user?.animesFavorites || []}
           refetchAnimesFavorites={fetchUser}
         />
         <RowContent
-          title="Mejor valorados"
+          title="Top rated"
           animes={animes.bypopularity}
           animesFavorites={user?.animesFavorites || []}
           refetchAnimesFavorites={fetchUser}
         />
         <RowContent
-          title="Se estrenan proximamente Animeflix"
+          title="Coming soon on Animeflix"
           animes={animes.upcoming}
           animesFavorites={user?.animesFavorites || []}
           refetchAnimesFavorites={fetchUser}
         />
         <RowContent
-          title="En emisión"
+          title="Currently airing"
           animes={animes.airing}
           animesFavorites={user?.animesFavorites || []}
           refetchAnimesFavorites={fetchUser}
