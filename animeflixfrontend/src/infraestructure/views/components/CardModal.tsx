@@ -11,7 +11,7 @@ import { Card } from "./Card";
 import type { Anime } from "../../../domain/models/Anime";
 import { Heart } from "lucide-react";
 import { UserService } from "@/application/UserService";
-import { HttpUserRepository } from "@/infra/HttpUserRepository";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
 import { toast } from "sonner";
 
 interface Props {
