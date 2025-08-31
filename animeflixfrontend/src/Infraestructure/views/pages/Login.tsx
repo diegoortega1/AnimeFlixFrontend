@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 import { useRegisterUser } from "../hooks/useRegisterUser";
 import { useLoginUser } from "../hooks/useLoginUser";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ export function Login() {
     setEmail("");
     setPassword("");
   }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistration) {

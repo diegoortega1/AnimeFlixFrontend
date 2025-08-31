@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
-import { AnimeService } from "../core/Application/AnimeService";
-import "../globals.css";
+import { AnimeService } from "../../../application/AnimeService";
+import "../../../globals.css";
 import { Header } from "../components/Header";
-import { JikenApiAnimeRepository } from "../Infraestructure/JikenApiAnimeRepository";
+import { HttpAnimeRepository } from "../../HttpAnimeRepository";
 import { LoaderScreen } from "../components/LoaderScreen";
 import { RowContent } from "../components/RowContent";
-import type { AnimeByGenreResponse } from "../core/Domain/AnimeByGenreResponse";
-import { UserService } from "../core/Application/UserService";
-import { MongoUserRepository } from "../Infraestructure/MongoUserRepository";
-import type { User } from "../core/Domain/User";
+import type { AnimeByGenreResponse } from "../../../domain/models/AnimeByGenreResponse";
+import { UserService } from "../../../application/UserService";
+import { HttpUserRepository } from "../../HttpUserRepository";
+import type { User } from "@/domain/models/User";
 
 function Home() {
   const [animes, setAnimes] = useState<AnimeByGenreResponse>();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
 
   async function fetchAnimes() {
     try {
       setLoading(true);
       const animeData = await AnimeService.listAnimes({
-        animeRepository: JikenApiAnimeRepository,
+        animeRepository: HttpAnimeRepository,
       });
       if (animeData) {
         setAnimes(animeData);
@@ -32,24 +33,25 @@ function Home() {
   }
   async function fetchUser() {
     try {
-      setLoading(true);
+      setLoading2(true);
       const userData = await UserService.listInfo({
-        userRepository: MongoUserRepository,
+        userRepository: HttpUserRepository,
       });
       if (userData) {
         setUser(userData);
+        console.log("userData", userData);
       }
     } catch (error) {
       console.error("Error fetching user info", error);
     } finally {
-      setLoading(false);
+      setLoading2(false);
     }
   }
   useEffect(() => {
     fetchAnimes();
     fetchUser();
   }, []);
-  if (loading) {
+  if (loading || loading2) {
     return <LoaderScreen />;
   }
   if (!animes || !user) {

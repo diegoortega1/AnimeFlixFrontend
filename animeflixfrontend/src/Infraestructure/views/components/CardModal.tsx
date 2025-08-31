@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,12 +6,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "../components/ui/dialog";
 import { Card } from "./Card";
-import type { Anime } from "../core/Domain/Anime";
+import type { Anime } from "../../../domain/models/Anime";
 import { Heart } from "lucide-react";
-import { useFetchDeleteAnimeFavorite } from "../hooks/useFetchDeleteAnimeFavorite";
-import { useFetchAddAnimeFavorite } from "../hooks/useFetchAddAnimeFavorite";
+import { UserService } from "@/application/UserService";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
+import { toast } from "sonner";
 
 interface Props {
   anime: Anime;
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
+  console.log("recargo", favorites);
   const isFavorite = favorites.some((favorite) => favorite.id === anime.id);
   function handleFavorite() {
     if (isFavorite) {
@@ -28,7 +30,7 @@ export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
         refetchAnimesFavorites: refetchAnimesFavorites,
       });
     } else {
-      useFetchAddAnimeFavorite({
+      addAnimeFavorite({
         anime: anime,
         refetchAnimesFavorites: refetchAnimesFavorites,
       });
@@ -99,4 +101,54 @@ export function CardModal({ anime, favorites, refetchAnimesFavorites }: Props) {
       </DialogContent>
     </Dialog>
   );
+}
+
+interface AddAnimeFavorite {
+  anime: Anime;
+  refetchAnimesFavorites: any;
+}
+
+async function addAnimeFavorite({
+  anime,
+  refetchAnimesFavorites,
+}: AddAnimeFavorite): Promise<void> {
+  try {
+    await UserService.addToFavorites({
+      userRepository: HttpUserRepository,
+      anime,
+    });
+    toast.success("Añadido a favoritos", {
+      description: "El anime se ha añadido con éxito.",
+    });
+    refetchAnimesFavorites();
+  } catch (err: unknown) {
+    toast.error("Error al registrarse", {
+      description: "Se ha producido un error. " + err,
+    });
+  }
+}
+
+interface DeleteAnimeFavorite {
+  id: number;
+  refetchAnimesFavorites: any;
+}
+
+async function useFetchDeleteAnimeFavorite({
+  id,
+  refetchAnimesFavorites,
+}: DeleteAnimeFavorite): Promise<void> {
+  try {
+    await UserService.removeFromFavorites({
+      userRepository: HttpUserRepository,
+      id,
+    });
+    toast.success("Eliminado de favoritos", {
+      description: "El anime se ha eliminado con éxito.",
+    });
+    refetchAnimesFavorites();
+  } catch (err: unknown) {
+    toast.error("Error al registrarse", {
+      description: "Se ha producido un error. " + err,
+    });
+  }
 }

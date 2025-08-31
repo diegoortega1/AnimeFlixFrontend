@@ -1,8 +1,8 @@
 import type { JSX } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import Login from "./views/pages/Login";
+import Home from "./views/pages/Home";
+import Profile from "./views/pages/Profile";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const token = localStorage.getItem("authToken");

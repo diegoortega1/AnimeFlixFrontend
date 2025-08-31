@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardTitle } from "../components/ui/card";
+import { Avatar, AvatarImage } from "../components/ui/avatar";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 import { EditIcon } from "lucide-react";
 import { Header } from "../components/Header";
 import { useFetchUser } from "../hooks/useFetchUser";
-import type { User } from "../core/Domain/User";
 import { useFetchModifyUser } from "../hooks/useFetchModifyUser";
 import { useNavigate } from "react-router-dom";
+import type { User } from "@/domain/models/User";
 
 function Profile() {
   const [editing, setEditing] = useState(false);

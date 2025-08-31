@@ -1,7 +1,7 @@
-import type { Anime } from "./Anime";
-import type { AnimeByGenreResponse } from "./AnimeByGenreResponse";
-import type { AnimeByGenreResponseDTO } from "./AnimeByGenreResponseDTO";
-import type { AnimeDTO } from "./AnimeDTO";
+import type { AnimeByGenreResponseDTO } from "../DTOs/AnimeByGenreResponseDTO";
+import type { AnimeDTO } from "../DTOs/AnimeDTO";
+import type { Anime } from "../models/Anime";
+import type { AnimeByGenreResponse } from "../models/AnimeByGenreResponse";
 
 export function mapAnimeDtoToAnime(animeDTO: AnimeDTO): Anime {
   return {

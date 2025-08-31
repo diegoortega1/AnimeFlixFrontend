@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import type { User } from "../core/Domain/User";
-import { getUser } from "../Infraestructure/userApi";
+import type { User } from "@/domain/models/User";
+import { UserService } from "@/application/UserService";
+import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
 
 export function useFetchUser() {
   const [user, setUser] = useState<User>();
@@ -8,7 +9,9 @@ export function useFetchUser() {
 
   const fetchUser = async () => {
     try {
-      const response = await getUser();
+      const response = await UserService.listInfo({
+        userRepository: HttpUserRepository,
+      });
       setUser(response);
     } catch (error: any) {
       setErrors(error.message || "Unexpected error");

@@ -1,6 +1,6 @@
-import type { Anime } from "../Domain/Anime";
-import type { UserRepository } from "../Domain/UserRepository";
-import type { User } from "../Domain/User";
+import type { UserRepository } from "@/domain/repository/UserRepository";
+import type { Anime } from "../domain/models/Anime";
+import type { User } from "@/domain/models/User";
 
 interface ListOptions {
   userRepository: UserRepository;
@@ -30,9 +30,9 @@ export const UserService = {
     return animes;
   },
   addToFavorites: async ({ userRepository, anime }: AddFavorite) => {
-    userRepository.addAnime(anime);
+    return userRepository.addAnime(anime);
   },
   removeFromFavorites: async ({ userRepository, id }: RemoveFavorite) => {
-    userRepository.removeAnime(id);
+    return userRepository.removeAnime(id);
   },
 };

@@ -1,6 +1,7 @@
 import { toast } from "sonner";
-import type { User } from "../core/Domain/User";
-import { loginUser } from "../Infraestructure/userApi";
+import type { User } from "@/domain/models/User";
+import { AuthService } from "@/application/AuthService";
+import { HttpAuthRepository } from "@/infraestructure/HttpAuthRepository";
 
 interface Props {
   user: User;
@@ -8,7 +9,10 @@ interface Props {
 }
 export async function useLoginUser({ user, navigate }: Props) {
   try {
-    const response = await loginUser(user);
+    const response = await AuthService.login({
+      authRepository: HttpAuthRepository,
+      user,
+    });
     localStorage.setItem("authToken", response.token);
     navigate("/home");
   } catch (err: unknown) {

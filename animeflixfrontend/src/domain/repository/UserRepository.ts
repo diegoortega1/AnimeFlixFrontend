@@ -1,5 +1,5 @@
-import type { Anime } from "./Anime";
-import type { User } from "./User";
+import type { Anime } from "../models/Anime";
+import type { User } from "../models/User";
 
 export interface UserRepository {
   listInfo(): Promise<User>;

@@ -1,4 +1,4 @@
-import type { AnimeRepository } from "../Domain/AnimeRepository";
+import type { AnimeRepository } from "@/domain/repository/AnimeRepository";
 
 interface Props {
   animeRepository: AnimeRepository;

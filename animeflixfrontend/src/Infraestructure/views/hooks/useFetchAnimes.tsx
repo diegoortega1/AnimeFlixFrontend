@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { JikenApiAnimeRepository } from "../Infraestructure/JikenApiAnimeRepository";
-import type { AnimeByGenreResponse } from "../core/Domain/AnimeByGenreResponse";
+import { HttpAnimeRepository } from "../../HttpAnimeRepository";
+import type { AnimeByGenreResponse } from "../../../domain/models/AnimeByGenreResponse";
 
 export function useFetchAnime() {
   const [animes, setAnimes] = useState<AnimeByGenreResponse>();
@@ -8,7 +8,7 @@ export function useFetchAnime() {
   useEffect(() => {
     const fetchAnime = async () => {
       try {
-        const response = await JikenApiAnimeRepository.listAnimes();
+        const response = await HttpAnimeRepository.listAnimes();
         setAnimes(response);
       } catch (error: any) {
         setErrors(error.message || "Unexpected error");

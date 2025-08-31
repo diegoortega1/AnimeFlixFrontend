@@ -1,5 +1,25 @@
 import type { Anime } from "@/domain/models/Anime";
+import type { UserRepository } from "@/domain/repository/UserRepository";
 import type { User } from "@/domain/models/User";
+
+export const HttpUserRepository: UserRepository = {
+  listInfo: async () => {
+    const response = await getUser();
+    return response;
+  },
+  modifyUsername: async (user: User) => {
+    const response = await modifyUser(user);
+    return response;
+  },
+  addAnime: async (anime: Anime) => {
+    const response = await addAnimeFavorite(anime);
+    return response;
+  },
+  removeAnime: async (id: number) => {
+    const response = await removeAnimeFavorite(id);
+    return response;
+  },
+};
 
 function handleUnauthorized() {
   localStorage.removeItem("authToken");
@@ -26,17 +46,14 @@ export async function addAnimeFavorite(anime: Anime): Promise<any> {
 export async function removeAnimeFavorite(id: number): Promise<any> {
   const token = localStorage.getItem("authToken");
   if (!token) throw new Error("No auth token found");
-  const response = await fetch(
-    "http://localhost:8000/animes/favorites/" + { id },
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ id }),
-    }
-  );
+  const response = await fetch("http://localhost:8000/animes/favorites/" + id, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ id }),
+  });
   const data = await response.json();
   if (response.status !== 200)
     throw new Error(data.detail || "Error deleting favorite");
@@ -56,6 +73,7 @@ export async function registerUser(user: User): Promise<any> {
     throw new Error(data.detail || data.message || "Error in register");
   return data;
 }
+
 export async function loginUser(user: User): Promise<any> {
   const response = await fetch("http://localhost:8000/login", {
     method: "POST",
