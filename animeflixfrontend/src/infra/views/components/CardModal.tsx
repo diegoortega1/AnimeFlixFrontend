@@ -1,4 +1,4 @@
-import { Button } from "../components/ui/button";
+import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,12 +6,12 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../components/ui/dialog";
+} from "./ui/dialog";
 import { Card } from "./Card";
 import type { Anime } from "../../../domain/models/Anime";
 import { Heart } from "lucide-react";
 import { UserService } from "@/application/UserService";
-import { HttpUserRepository } from "@/infraestructure/HttpUserRepository";
+import { HttpUserRepository } from "@/infra/HttpUserRepository";
 import { toast } from "sonner";
 
 interface Props {
